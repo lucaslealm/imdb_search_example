@@ -1,9 +1,17 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row">
     <div class="col-sm-8 offset-sm-2">
+      <%= simple_form_for :search, url: movies_path, method: :get do |f| %>
+        <%= f.input :query, 
+          class: "form-control",
+          placeholder: "Find a movie" 
+        %>
+        <%= f.submit "Search", class: "btn btn-primary mb-4" %>
+      <% end %>
       <div id="movies">
         <% @movies.each do |movie| %>
-          <h4><%= movie.title %></h4>
+          <h3><%= movie.title %></h3>
+          <h5><%= "Director: #{movie.director.first_name} #{movie.director.last_name}"%></h5>
           <p><%= movie.syllabus %></p>
         <% end %>
       </div>
