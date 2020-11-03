@@ -1,13 +1,7 @@
 class MoviesController < ApplicationController
     def index
       if params[:search].present?
-        sql_query = " \
-          movies.title @@ :query \
-          OR movies.syllabus @@ :query \
-          OR directors.first_name @@ :query \
-          OR directors.last_name @@ :query \
-        "
-        @movies = Movie.joins(:director).where(sql_query, query: "%#{params[:search][:query]}%")
+        @movies = Movie.search_by_title_and_syllabus("%#{params[:search][:query]}%")
       else
         @movies = Movie.all
       end
