@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
     def index
-      if params[:search][:query].present?
+      if params[:search].present?
         sql_query = " \
           movies.title @@ :query \
           OR movies.syllabus @@ :query \
